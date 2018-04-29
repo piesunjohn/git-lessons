@@ -366,3 +366,81 @@ If you wanted to merge C3 onto C5, that'd be easy to do -- simply copy comment o
 
 
 
+### Reverting changes
+
+Why would you not create a new commit that deletes the problem vs commiting a revert?
+* Your history is cleaner and therefore easier to know what's happened throughout the lifetime of the project
+
+Two types of scenarios for reverting:
+* Before you have pushed changes to the remote repo
+* After you have pushed the changes (someone might have done some work on these changes)
+
+Before pushing
+* You can do pretty much wahtever you want
+* When you push is when it really matters so other people work on top of what you have done
+* Unless you are pushing to a branch in which only you are working, never push things that will break the program. You can commit, but don't push, until you NEED to.
+* Keep these locally until you need to push them or they are complete to some extent.
+* Before pushing you are allowed to permanently delete commits
+* For example, great if you've done something that is not useful
+* You can just delete the commits as if they had never happened
+* WARNING: YOU CANNOT BRING THEM BACK!
+
+Deleting commits
+* We can delete one or various commit with `git reset <commit>`
+* This will delete all commits up to and including the referenced <commit>
+* Remember relative referencing of commits (Head^, HEAD~3)
+
+*Diagram explanation of reset*
+
+```
+    C0
+    ||
+    C1
+    ||
+    C2
+    ||
+    C3 <--- master
+
+>if we do <git reset HEAD~2>
+
+    C0
+    ||
+    C1 <--- master
+```
+
+After pushing:
+* Someone might have worked with the code you pushed to the remote
+* You *shouldn't delete commits irreversibly* just in case someone used them!
+* What we can do is revert the commits, which creates a new commit that undoes what the former did
+* We use `git revert <commit>`
+
+*Diagram explanation of revert*
+
+```
+    C0
+    ||
+    C1
+    ||
+    C2 <--- master
+
+> git revert HEAD^
+
+    C0
+    ||
+    C1
+    ||
+    C2
+    ||
+    C3 <--- master
+
+This creates a new commit C3 and goes back to C1's commit. 
+```
+
+Why revert?
+* Because if someone was indeed using our commit, we can always re-revert the commit we reverted and bring it back
+* Since nothing is deleted, there is always a chance to fix things if something went wrong.
+* Generally don't use resets -- use reverts
+
+ 
+
+
