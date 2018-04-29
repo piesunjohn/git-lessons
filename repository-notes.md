@@ -40,7 +40,7 @@ This is a test.
 ```
 
 and file 2 has:
-````
+```
 Hello, world! We are testing a change.
 ```
 
@@ -264,10 +264,94 @@ Relative referencing is easy:
 The ~2 would mean the branch from the current location of master would go up twice. Two commits above master. And this is called *detaching the head*. The head is where you are currently at. Thus, that command would *detach* the head at master C2 to C0.
 
 
-So how can you move these branches to a *remote* directory?
+
+Bringing in a remote branch from a remote repository to a local repository. We might want to do two things: (1) if we're working on that branch with other people but make some changes and push it back, then we want to create a local branch that follows that remote branch or (2) someone has created and finished a new branch and you want to bring that in and merge it with your local branch without getting a new branch.
+
+For (1):
+* Creating a local branch so that you can push back some changes to that remote branch
+ - `git checkout -b <localbranchname> <remotebranchtracked>
+
+For (2):
+ 
 
 
 
+
+### Deleting local and remote branches
+
+* Command is `git branch -d <branchname>` for local
+* For remote: either
+ - git push origin :<branchname> <-- :syntax means "nothing" a little complicated syntax
+ - git push origin --delete <branchname> <-- probably easier
+
+
+
+
+### Merging branches
+
+In order to merge, *we need to be in the branch that is going to receive the changes*. Then you use `git merge <branch>`
+
+
+Fast-forward merge
+
+    C0
+    ||
+    C1
+    ||
+    C2 <---master
+     \\
+      C3
+      ||
+      C4 <---feature-1
+
+In this type of merge, if you want to merge feature-1 to master, you just move the master from C2 to C3 and then to C4.
+
+
+A more complex, "normal" merge is called the *True Merge*. If two files are different (and not a fast-forward), the changes of one are applied to the other if possible. If it isn't possible, you have something called "Merge-ever" and you have to deal with that.
+
+
+
+    C0
+    ||
+    C1
+    ||
+    C2<---parent
+    ||\\
+ m->C5 C3
+       ||
+       C4 <---feature-1
+
+In the instance above, feature-1 is not an extension of the master branch but they have a common ancestor in C2; in this case if you checkout the master, you place the HEAD in C5 and you have the MERGE_HEAD in C4.
+
+Suppose the code in C2 has this code:
+```
+my_string = "Hello World"
+print(my_string)
+```
+
+And Master(C5) adds a new comment:
+```
+my_string = "Hello World"
+print(my_string)
+#this is a comment from C5
+```
+
+And C3 adds a new comment on line 2:
+```
+my_string = "Hello World"
+#comment on feature-1
+print(my_string)
+```
+
+If you wanted to merge C3 onto C5, that'd be easy to do -- simply copy comment on C3 and put it on master C5. 
+
+
+*What happens if we have a merge error?*
+
+* Merge errors happen if the two branches make different changes *in the same line*
+* For example, one adds a comment on line 2 that says "hello", and the other one adds a comment that says "goodbye".
+* You'd have to go through the file and eliminate the parts you don't want (i.e. <<<<<< master =======)
+* Then you add and commit again (you can use merge tools)
 
 
 
