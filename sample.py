@@ -5,6 +5,5 @@ print(my_string)
 
 #this is another edit to confirm that it was a success. 
 
-
-#this is another edit to check if this file on test-branch merged successfully with test-branch2
+#this is an edit to test merging between test-branch2 and test-branch. This was written on test-branch
 
