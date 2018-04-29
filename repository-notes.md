@@ -151,6 +151,7 @@ This is what it looks like:
 * The next commit stored below C0 is what we call C1
 * Then C2, C3, etc...
 
+```
 ===========
 
     C0
@@ -164,6 +165,7 @@ This is what it looks like:
 
 
 ===========
+```
 
 *This is called a branch* They're a bunch of commits! In the picture above, the newest commit is in C3 because it's the last commit. Thus, the branch is just really the last commit and all the commits above that are linked to it.
 
@@ -172,6 +174,7 @@ So when we name a branch, we're naming the last commit.
 
 These are two branches(at C4 and C5):
 
+```
 ==========
 
     C0
@@ -184,6 +187,8 @@ These are two branches(at C4 and C5):
 
 
 =========
+```
+
  > Master and feature-1 are branch names.
 
 
@@ -193,6 +198,7 @@ These are two branches(at C4 and C5):
 
 For example,
 
+```
   git commit C0          C0
                          ||
   git commit C1          C1
@@ -202,10 +208,11 @@ For example,
   git branch feature-1 (creates feature-1 to the right of master at C2)
 
   git checkout feature-1
-
+```
 
 Once we commit:
 
+```
   git commit C3
   git commit C4
 
@@ -218,10 +225,11 @@ Once we commit:
        C3 <---feature-1
        ||
        C4 <---(still)feature-1
-
+```
 
 If we then do:
 
+```
   git checkout master
   git commit C5
 
@@ -234,6 +242,7 @@ If we then do:
 master C5  C3 <---feature-1
            ||
            C4 <---(still)feature-1
+```
 
 >master moved to C5
 
@@ -248,11 +257,13 @@ So we can see what `checkout` does -- it allows us to move between branches. Whe
 
 For example, if we did git checkout C0 from:
 
+```
   C0
   ||
   C1
   ||
   C2 <--- master
+```
 
 Then, C0 will become the master.
 
@@ -309,8 +320,7 @@ In this type of merge, if you want to merge feature-1 to master, you just move t
 
 A more complex, "normal" merge is called the *True Merge*. If two files are different (and not a fast-forward), the changes of one are applied to the other if possible. If it isn't possible, you have something called "Merge-ever" and you have to deal with that.
 
-
-
+```
     C0
     ||
     C1
@@ -320,6 +330,7 @@ A more complex, "normal" merge is called the *True Merge*. If two files are diff
  m->C5 C3
        ||
        C4 <---feature-1
+```
 
 In the instance above, feature-1 is not an extension of the master branch but they have a common ancestor in C2; in this case if you checkout the master, you place the HEAD in C5 and you have the MERGE_HEAD in C4.
 
