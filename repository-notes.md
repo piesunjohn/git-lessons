@@ -88,6 +88,8 @@ Good commit messages:
 Issue: #<issue number> <short description of issue>
 Modified/Fixed/Added: <file> <what does this file do>
 ```
+Link on good commit messages: https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+
 
 ### Adding Remotes
 
@@ -442,5 +444,37 @@ Why revert?
 * Generally don't use resets -- use reverts
 
  
+
+### Gitflow workflow
+
+Why is a workflow important?
+* Makes sure everyone working on the project follows the same protocol
+* Prevents merge conflicts
+* Cleans up the history because you can follow what was done in each of the branches
+* Streamlines your work and process because everyone knows what to do and how to do it
+
+*The Gitflow workflow*
+* Each person/group works in a branch
+* Each branch is used for one thing: a new feature, a bug fix, etc...
+* After work is finished in a branch, it is added to the main branch and other branches where needed.
+
+##### Master Branch only holds the latest production-ready release
+If you have a problem with your production release, you may need to address hotfixes.
+
+##### Hotfix Branches
+Create a branch from the master branch, fix it, and put it back to the master branch and increase the version number
+
+##### Release Branch
+Prepare for a major release. Before 1.0 in Master Branch, you want to prepare for it with the Release Branch
+
+##### Develop Branch
+Develop branch holds small changes that may occur, such as having to add a tiny bit of code here and there, licenses, etc. Also incorporates bug fixes. Develop is also used to merge FEATURES.
+
+##### Feature-1 Branch
+A feature for a release in the Master Branch is first merged to Develop, which may go to Release or Master. Always merge features back. You can have multiple feature branches.
+
+
+
+
 
 
